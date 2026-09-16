@@ -2,6 +2,13 @@
 <html>
 <head>
   <title>Seat Map</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    .seat { display: inline-block; width: 80px; margin: 5px; padding: 10px; text-align: center; border-radius: 5px; color: white; }
+    .available { background-color: green; }
+    .held { background-color: orange; }
+    .confirmed { background-color: red; }
+  </style>
   <script>
     async function loadSeats() {
       const res = await fetch('/api/seats/map');
@@ -10,7 +17,8 @@
       container.innerHTML = '';
       seats.forEach(s => {
         const div = document.createElement('div');
-        div.textContent = `Seat ${s.seat}: ${s.status}`;
+        div.className = `seat ${s.status}`;
+        div.textContent = `Seat ${s.seat}\n${s.status}`;
         container.appendChild(div);
       });
     }
