@@ -1,0 +1,73 @@
+/* Global styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+}
+
+/* Navigation bar */
+nav {
+  background: #222;
+  padding: 12px;
+}
+
+nav a {
+  color: #ccc;
+  margin-right: 20px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a.active {
+  color: #fff;
+  border-bottom: 2px solid #00bfff;
+}
+
+nav a:hover {
+  color: #fff;
+}
+
+/* Seat map styles */
+.seat {
+  display: inline-block;
+  width: 80px;
+  margin: 5px;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+  color: white;
+}
+
+.available {
+  background-color: green;
+}
+
+.held {
+  background-color: orange;
+}
+
+.confirmed {
+  background-color: red;
+}
+
+/* Event log table */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 20px;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f4f4f4;
+}
+
+/* Waitlist */
+#waitlist {
+  margin-top: 20px;
+  font-size: 16px;
+}
