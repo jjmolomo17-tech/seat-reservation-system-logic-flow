@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Waitlist</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    #waitlist { margin-top: 20px; }
+  </style>
+  <script>
+    async function joinWaitlist() {
+      const email = document.getElementById('email').value;
+      const res = await fetch('/api/seats/waitlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      });
+      const data = await res.json();
+      document.getElementById('waitlist').textContent = 
+        `You are at position ${data.waitlistPosition} in the waitlist.`;
+    }
+  </script>
+</head>
+<body>
+  <h1>Waitlist</h1>
+  <input id="email" placeholder="Enter your email">
+  <button onclick="joinWaitlist()">Join Waitlist</button>
+  <div id="waitlist"></div>
+</body>
+</html>
