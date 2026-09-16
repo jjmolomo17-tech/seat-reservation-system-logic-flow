@@ -1,17 +1,25 @@
 {
   "name": "seat-reservation-system-logic-flow",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Seat reservation system with waitlist, expiry, and event log",
+  "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jjmolomo17-tech/seat-reservation-system-logic-flow.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "express",
+    "seat-reservation",
+    "waitlist",
+    "nodejs",
+    "jest"
+  ],
+  "author": "Joy Molomo",
   "license": "ISC",
   "type": "commonjs",
   "bugs": {
