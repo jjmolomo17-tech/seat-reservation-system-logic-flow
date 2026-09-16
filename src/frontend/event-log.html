@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Event Log</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    th { background-color: #f4f4f4; }
+  </style>
+  <script>
+    async function loadEventLog() {
+      const seatFilter = document.getElementById('seatFilter').value;
+      const url = seatFilter 
+        ? `/api/seats/event-log?seat=${seatFilter}` 
+        : '/api/seats/event-log';
+      const res = await fetch(url);
+      const events = await res.json();
+
+      const tbody = document.getElementById('eventLogBody');
+      tbody.innerHTML = '';
+      events.forEach(e => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${e.timestamp}</td>
+          <td>${e.type}</td>
+          <td>${e.seat || '-'}</td>
+          <td>${e.email || '-'}</td>
+          <td>${e.code || '-'}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    setInterval(loadEventLog, 3000); // Poll every 3 seconds
+    window.onload = loadEventLog;
+  </script>
+</head>
+<body>
+  <h1>Event Log</h1>
+  <label>Filter by Seat:</label>
+  <input id="seatFilter" type="number" placeholder="Seat number">
+  <button onclick="loadEventLog()">Apply Filter</button>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Timestamp</th>
+        <th>Event Type</th>
+        <th>Seat</th>
+        <th>Email</th>
+        <th>Hold Code</th>
+      </tr>
+    </thead>
+    <tbody id="eventLogBody"></tbody>
+  </table>
+</body>
+</html>
