@@ -1,3 +1,4 @@
+// src/index.js
 const express = require('express');
 const cors = require('cors');
 const seatService = require('./services/seatService');
@@ -14,6 +15,9 @@ app.use('/api/seats', seatRoutes);
 app.get('/', (req, res) => {
   res.send('Seat Reservation System API is running. Use /api/seats/... endpoints.');
 });
+
+// Serve static frontend (seat-map.html, etc.)
+app.use(express.static('src/frontend'));
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`✅ Server running on http://localhost:${PORT}`));
