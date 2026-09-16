@@ -4,10 +4,12 @@
   <title>Seat Map</title>
   <style>
     body { font-family: Arial, sans-serif; }
-    .seat { display: inline-block; width: 80px; margin: 5px; padding: 10px; text-align: center; border-radius: 5px; color: white; }
-    .available { background-color: green; }
-    .held { background-color: orange; }
-    .confirmed { background-color: red; }
+    nav { background:#333; padding:10px; }
+    nav a { color:white; margin-right:15px; text-decoration:none; }
+    .seat { display:inline-block; width:80px; margin:5px; padding:10px; text-align:center; border-radius:5px; color:white; }
+    .available { background-color:green; }
+    .held { background-color:orange; }
+    .confirmed { background-color:red; }
   </style>
   <script>
     async function loadSeats() {
@@ -36,11 +38,18 @@
       loadSeats();
     }
 
-    setInterval(loadSeats, 2000); // Poll every 2 seconds
+    setInterval(loadSeats, 2000);
     window.onload = loadSeats;
   </script>
 </head>
 <body>
+  <nav>
+    <a href="seat-map.html">Seat Map</a>
+    <a href="manage-hold.html">Manage Hold</a>
+    <a href="event-log.html">Event Log</a>
+    <a href="waitlist.html">Waitlist</a>
+  </nav>
+
   <h1>Seat Map</h1>
   <div id="seat-map"></div>
   <input id="email" placeholder="Email">

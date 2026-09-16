@@ -4,6 +4,8 @@
   <title>Waitlist</title>
   <style>
     body { font-family: Arial, sans-serif; }
+    nav { background:#333; padding:10px; }
+    nav a { color:white; margin-right:15px; text-decoration:none; }
     #waitlist { margin-top: 20px; }
   </style>
   <script>
@@ -15,12 +17,19 @@
         body: JSON.stringify({ email })
       });
       const data = await res.json();
-      document.getElementById('waitlist').textContent = 
+      document.getElementById('waitlist').textContent =
         `You are at position ${data.waitlistPosition} in the waitlist.`;
     }
   </script>
 </head>
 <body>
+  <nav>
+    <a href="seat-map.html">Seat Map</a>
+    <a href="manage-hold.html">Manage Hold</a>
+    <a href="event-log.html">Event Log</a>
+    <a href="waitlist.html">Waitlist</a>
+  </nav>
+
   <h1>Waitlist</h1>
   <input id="email" placeholder="Enter your email">
   <button onclick="joinWaitlist()">Join Waitlist</button>

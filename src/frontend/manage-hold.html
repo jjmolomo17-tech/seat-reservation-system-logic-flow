@@ -2,6 +2,11 @@
 <html>
 <head>
   <title>Manage Hold</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    nav { background:#333; padding:10px; }
+    nav a { color:white; margin-right:15px; text-decoration:none; }
+  </style>
   <script>
     async function extendHold() {
       const email = document.getElementById('email').value;
@@ -11,8 +16,7 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, holdCode })
       });
-      const data = await res.json();
-      alert(JSON.stringify(data));
+      alert(JSON.stringify(await res.json()));
     }
 
     async function confirmHold() {
@@ -23,8 +27,7 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, holdCode })
       });
-      const data = await res.json();
-      alert(JSON.stringify(data));
+      alert(JSON.stringify(await res.json()));
     }
 
     async function releaseHold() {
@@ -35,12 +38,18 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, holdCode })
       });
-      const data = await res.json();
-      alert(JSON.stringify(data));
+      alert(JSON.stringify(await res.json()));
     }
   </script>
 </head>
 <body>
+  <nav>
+    <a href="seat-map.html">Seat Map</a>
+    <a href="manage-hold.html">Manage Hold</a>
+    <a href="event-log.html">Event Log</a>
+    <a href="waitlist.html">Waitlist</a>
+  </nav>
+
   <h1>Manage Hold</h1>
   <label>Email:</label>
   <input id="email" placeholder="Enter your email"><br><br>

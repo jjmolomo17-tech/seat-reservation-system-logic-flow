@@ -4,6 +4,8 @@
   <title>Event Log</title>
   <style>
     body { font-family: Arial, sans-serif; }
+    nav { background:#333; padding:10px; }
+    nav a { color:white; margin-right:15px; text-decoration:none; }
     table { border-collapse: collapse; width: 100%; margin-top: 20px; }
     th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
     th { background-color: #f4f4f4; }
@@ -11,9 +13,7 @@
   <script>
     async function loadEventLog() {
       const seatFilter = document.getElementById('seatFilter').value;
-      const url = seatFilter 
-        ? `/api/seats/event-log?seat=${seatFilter}` 
-        : '/api/seats/event-log';
+      const url = seatFilter ? `/api/seats/event-log?seat=${seatFilter}` : '/api/seats/event-log';
       const res = await fetch(url);
       const events = await res.json();
 
@@ -32,11 +32,18 @@
       });
     }
 
-    setInterval(loadEventLog, 3000); // Poll every 3 seconds
+    setInterval(loadEventLog, 3000);
     window.onload = loadEventLog;
   </script>
 </head>
 <body>
+  <nav>
+    <a href="seat-map.html">Seat Map</a>
+    <a href="manage-hold.html">Manage Hold</a>
+    <a href="event-log.html">Event Log</a>
+    <a href="waitlist.html">Waitlist</a>
+  </nav>
+
   <h1>Event Log</h1>
   <label>Filter by Seat:</label>
   <input id="seatFilter" type="number" placeholder="Seat number">
