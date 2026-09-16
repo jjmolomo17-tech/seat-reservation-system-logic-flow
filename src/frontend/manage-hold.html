@@ -3,9 +3,11 @@
 <head>
   <title>Manage Hold</title>
   <style>
-    body { font-family: Arial, sans-serif; }
-    nav { background:#333; padding:10px; }
-    nav a { color:white; margin-right:15px; text-decoration:none; }
+    body { font-family: Arial, sans-serif; margin:0; }
+    nav { background:#222; padding:12px; }
+    nav a { color:#ccc; margin-right:20px; text-decoration:none; font-weight:bold; }
+    nav a.active { color:#fff; border-bottom:2px solid #00bfff; }
+    nav a:hover { color:#fff; }
   </style>
   <script>
     async function extendHold() {
@@ -18,7 +20,6 @@
       });
       alert(JSON.stringify(await res.json()));
     }
-
     async function confirmHold() {
       const email = document.getElementById('email').value;
       const holdCode = document.getElementById('holdCode').value;
@@ -29,7 +30,6 @@
       });
       alert(JSON.stringify(await res.json()));
     }
-
     async function releaseHold() {
       const email = document.getElementById('email').value;
       const holdCode = document.getElementById('holdCode').value;
@@ -40,14 +40,17 @@
       });
       alert(JSON.stringify(await res.json()));
     }
+    window.onload = () => {
+      document.getElementById('nav-manage').classList.add('active');
+    };
   </script>
 </head>
 <body>
   <nav>
-    <a href="seat-map.html">Seat Map</a>
-    <a href="manage-hold.html">Manage Hold</a>
-    <a href="event-log.html">Event Log</a>
-    <a href="waitlist.html">Waitlist</a>
+    <a href="seat-map.html" id="nav-seat">Seat Map</a>
+    <a href="manage-hold.html" id="nav-manage">Manage Hold</a>
+    <a href="event-log.html" id="nav-event">Event Log</a>
+    <a href="waitlist.html" id="nav-waitlist">Waitlist</a>
   </nav>
 
   <h1>Manage Hold</h1>

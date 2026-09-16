@@ -3,9 +3,11 @@
 <head>
   <title>Seat Map</title>
   <style>
-    body { font-family: Arial, sans-serif; }
-    nav { background:#333; padding:10px; }
-    nav a { color:white; margin-right:15px; text-decoration:none; }
+    body { font-family: Arial, sans-serif; margin:0; }
+    nav { background:#222; padding:12px; }
+    nav a { color:#ccc; margin-right:20px; text-decoration:none; font-weight:bold; }
+    nav a.active { color:#fff; border-bottom:2px solid #00bfff; }
+    nav a:hover { color:#fff; }
     .seat { display:inline-block; width:80px; margin:5px; padding:10px; text-align:center; border-radius:5px; color:white; }
     .available { background-color:green; }
     .held { background-color:orange; }
@@ -24,7 +26,6 @@
         container.appendChild(div);
       });
     }
-
     async function placeHold() {
       const email = document.getElementById('email').value;
       const seatNumber = document.getElementById('seatNumber').value;
@@ -33,21 +34,22 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, seatNumber: Number(seatNumber) })
       });
-      const data = await res.json();
-      alert(JSON.stringify(data));
+      alert(JSON.stringify(await res.json()));
       loadSeats();
     }
-
     setInterval(loadSeats, 2000);
-    window.onload = loadSeats;
+    window.onload = () => {
+      loadSeats();
+      document.getElementById('nav-seat').classList.add('active');
+    };
   </script>
 </head>
 <body>
   <nav>
-    <a href="seat-map.html">Seat Map</a>
-    <a href="manage-hold.html">Manage Hold</a>
-    <a href="event-log.html">Event Log</a>
-    <a href="waitlist.html">Waitlist</a>
+    <a href="seat-map.html" id="nav-seat">Seat Map</a>
+    <a href="manage-hold.html" id="nav-manage">Manage Hold</a>
+    <a href="event-log.html" id="nav-event">Event Log</a>
+    <a href="waitlist.html" id="nav-waitlist">Waitlist</a>
   </nav>
 
   <h1>Seat Map</h1>
