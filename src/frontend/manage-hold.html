@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Manage Hold</title>
+  <script>
+    async function extendHold() {
+      const email = document.getElementById('email').value;
+      const holdCode = document.getElementById('holdCode').value;
+      const res = await fetch('/api/seats/extend', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, holdCode })
+      });
+      const data = await res.json();
+      alert(JSON.stringify(data));
+    }
+
+    async function confirmHold() {
+      const email = document.getElementById('email').value;
+      const holdCode = document.getElementById('holdCode').value;
+      const res = await fetch('/api/seats/confirm', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, holdCode })
+      });
+      const data = await res.json();
+      alert(JSON.stringify(data));
+    }
+
+    async function releaseHold() {
+      const email = document.getElementById('email').value;
+      const holdCode = document.getElementById('holdCode').value;
+      const res = await fetch('/api/seats/release', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, holdCode })
+      });
+      const data = await res.json();
+      alert(JSON.stringify(data));
+    }
+  </script>
+</head>
+<body>
+  <h1>Manage Hold</h1>
+  <label>Email:</label>
+  <input id="email" placeholder="Enter your email"><br><br>
+  <label>Hold Code:</label>
+  <input id="holdCode" placeholder="Enter your hold code"><br><br>
+  <button onclick="extendHold()">Extend Hold</button>
+  <button onclick="confirmHold()">Confirm Hold</button>
+  <button onclick="releaseHold()">Release Hold</button>
+</body>
+</html>
