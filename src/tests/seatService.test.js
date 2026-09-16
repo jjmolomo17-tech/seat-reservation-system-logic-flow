@@ -19,7 +19,7 @@ describe('Seat Reservation Rules', () => {
   test('Hold expires after configured seconds', () => {
     const result = seatService.placeHold('joy@example.com', 1);
     const code = result.holdCode;
-    // Fast-forward expiry
+    // Force expiry
     seatService.holds[code].expiry = Date.now() - 1000;
     seatService.getSeatMap();
     expect(seatService.seats[0]).toBe(null);
@@ -52,5 +52,34 @@ describe('Seat Reservation Rules', () => {
     // Joy should be promoted
     const promoted = Object.values(seatService.holds).find(h => h.email === 'joy@example.com');
     expect(promoted).toBeDefined();
+  });
+
+  test('User can extend a hold up to maxExtensions', () => {
+    const result = seatService.placeHold('joy@example.com', 1);
+    const code = result.holdCode;
+
+    // First extension
+    const first = seatService.extendHold('joy@example.com', code);
+    expect(first.extended).toBe(true);
+
+    // Second extension
+    const second = seatService.extendHold('joy@example.com', code);
+    expect(second.extended).toBe(true);
+
+    // Third extension should fail
+    expect(() => seatService.extendHold('joy@example.com', code)).toThrow('Max extensions reached');
+  });
+
+  test('User cannot exceed max holds per hour', () => {
+    // Place 5 holds successfully
+    for (let i = 1; i <= seatService.config.maxHoldsPerHour; i++) {
+      seatService.placeHold('joy@example.com', i);
+      // Release immediately to free seat, but still counts toward hourly limit
+      const code = Object.keys(seatService.holds)[0];
+      seatService.releaseHold('joy@example.com', code);
+    }
+
+    // Sixth hold should fail
+    expect(() => seatService.placeHold('joy@example.com', 6)).toThrow('User exceeded holds per hour');
   });
 });
