@@ -3,7 +3,6 @@
 <head>
   <title>Seat Map</title>
   <link rel="stylesheet" href="style.css">
-  
   <script>
     async function loadSeats() {
       const res = await fetch('/api/seats/map');
@@ -29,18 +28,15 @@
       loadSeats();
     }
     setInterval(loadSeats, 2000);
-    window.onload = () => {
-      loadSeats();
-      document.getElementById('nav-seat').classList.add('active');
-    };
+    window.onload = loadSeats;
   </script>
 </head>
 <body>
   <nav>
-    <a href="seat-map.html" id="nav-seat">Seat Map</a>
-    <a href="manage-hold.html" id="nav-manage">Manage Hold</a>
-    <a href="event-log.html" id="nav-event">Event Log</a>
-    <a href="waitlist.html" id="nav-waitlist">Waitlist</a>
+    <a href="seat-map.html" class="current">Seat Map</a>
+    <a href="manage-hold.html">Manage Hold</a>
+    <a href="event-log.html">Event Log</a>
+    <a href="waitlist.html">Waitlist</a>
   </nav>
 
   <h1>Seat Map</h1>

@@ -3,8 +3,6 @@
 <head>
   <title>Manage Hold</title>
   <link rel="stylesheet" href="style.css">
-
-
   <script>
     async function extendHold() {
       const email = document.getElementById('email').value;
@@ -36,17 +34,14 @@
       });
       alert(JSON.stringify(await res.json()));
     }
-    window.onload = () => {
-      document.getElementById('nav-manage').classList.add('active');
-    };
   </script>
 </head>
 <body>
   <nav>
-    <a href="seat-map.html" id="nav-seat">Seat Map</a>
-    <a href="manage-hold.html" id="nav-manage">Manage Hold</a>
-    <a href="event-log.html" id="nav-event">Event Log</a>
-    <a href="waitlist.html" id="nav-waitlist">Waitlist</a>
+    <a href="seat-map.html">Seat Map</a>
+    <a href="manage-hold.html" class="current">Manage Hold</a>
+    <a href="event-log.html">Event Log</a>
+    <a href="waitlist.html">Waitlist</a>
   </nav>
 
   <h1>Manage Hold</h1>
