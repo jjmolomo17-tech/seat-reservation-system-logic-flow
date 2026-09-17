@@ -1,5 +1,5 @@
 const request = require('supertest');
-const app = require('../index'); // adjust path if your Express app is exported elsewhere
+const app = require('../index'); // make sure your Express app is exported from index.js
 
 describe('Seat Reservation API', () => {
   //
@@ -20,13 +20,11 @@ describe('Seat Reservation API', () => {
   });
 
   test('POST /api/seats/confirm succeeds with valid email and holdCode', async () => {
-    // First place a hold
     const holdRes = await request(app)
       .post('/api/seats/hold')
       .send({ email: 'joy@example.com', seatNumber: 2 });
     const holdCode = holdRes.body.holdCode;
 
-    // Then confirm
     const res = await request(app)
       .post('/api/seats/confirm')
       .send({ email: 'joy@example.com', holdCode });
@@ -35,13 +33,11 @@ describe('Seat Reservation API', () => {
   });
 
   test('POST /api/seats/release succeeds with valid email and holdCode', async () => {
-    // First place a hold
     const holdRes = await request(app)
       .post('/api/seats/hold')
       .send({ email: 'joy@example.com', seatNumber: 3 });
     const holdCode = holdRes.body.holdCode;
 
-    // Then release
     const res = await request(app)
       .post('/api/seats/release')
       .send({ email: 'joy@example.com', holdCode });
@@ -50,13 +46,11 @@ describe('Seat Reservation API', () => {
   });
 
   test('POST /api/seats/extend succeeds with valid email and holdCode', async () => {
-    // First place a hold
     const holdRes = await request(app)
       .post('/api/seats/hold')
       .send({ email: 'joy@example.com', seatNumber: 4 });
     const holdCode = holdRes.body.holdCode;
 
-    // Then extend
     const res = await request(app)
       .post('/api/seats/extend')
       .send({ email: 'joy@example.com', holdCode });
