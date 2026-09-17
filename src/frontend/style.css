@@ -5,6 +5,29 @@ body {
 }
 
 /* Navigation bar */
+/* Navigation bar */
+nav {
+  background: #222;
+  padding: 12px;
+}
+
+nav a {
+  color: #ccc;
+  margin-right: 20px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a.current {
+  color: #fff;
+  border-bottom: 2px solid #00bfff;
+}
+
+nav a:hover {
+  color: #fff;
+}
+
+
 nav {
   background: #222;
   padding: 12px;
